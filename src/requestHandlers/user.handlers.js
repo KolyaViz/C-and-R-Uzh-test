@@ -1,7 +1,8 @@
 import User from "../models/user.js";
 
 export async function getAllUsers(req, res, next){
-    const users = await User.find({});
+
+    const users = await User.find();
     res.status(200).json({
         message: "Get all users",
         users
@@ -16,9 +17,9 @@ export async function getUserById(req, res, next){
     })
 }
 export async function addNewUser(req, res, next){
-    const {name, email} = req.body;
-    const user = User({name, email});
-    const result = user.save();
+    const {userName, email} = req.body;
+    const user = User({userName, email});
+    const result = await user.save();
     res.status(200).json({
         message: "created product successfully",
         result

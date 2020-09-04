@@ -1,10 +1,11 @@
 import express from "express";
-import {getAllUsers, getUserById, addNewUser} from "../requestHandlers/user.handlers";
+import {getAllUsers, getUserById, addNewUser} from "../requestHandlers/user.handlers.js";
+import wrapper from "../middleware/wrapper.js";
 
-const router  = express.Router;
+const router  = express.Router();
 
-router.get("/", getAllUsers);
-router.get("/:userId", getUserById);
-router.post("/", addNewUser);
+router.get("/", wrapper(getAllUsers));
+router.get("/:userId",wrapper(getUserById));
+router.post("/", wrapper(addNewUser));
 
 export default router;
